@@ -73,24 +73,24 @@ class SubMerge:
                                     {'dup_rm_enabled': True, 'format_name_enabled': True})
         content_write(yaml_p, content_yaml)
 
-        # content_base64 = self.sc.base64_encode(content_raw)
-        # content = content_raw
-        # write_list = [f'{sub_merge_path}/sub_merge.txt', f'{sub_merge_path}/sub_merge_base64.txt', yaml_p]
-        # content_type = (content, content_base64, content_yaml)
-        # for index in range(len(write_list)):
-        #     content_write(write_list[index], content_type[index])
+        content_base64 = self.sc.base64_encode(content_raw)
+        content = content_raw
+        write_list = [f'{sub_merge_path}/sub_merge.txt', f'{sub_merge_path}/sub_merge_base64.txt', yaml_p]
+        content_type = (content, content_base64, content_yaml)
+        for index in range(len(write_list)):
+            content_write(write_list[index], content_type[index])
 
-        # # delete CN nodes
-        # with open(yaml_p, 'rb') as f:
-        #     old_data = yaml.load(f)
-        # new_data = {'proxies': []}
-        # for i in range(len(old_data['proxies'])):
-        #     if 'CN' not in old_data['proxies'][i]['name']:
-        #         new_data['proxies'].append(old_data['proxies'][i])
-        # # print(len(new_data['proxies']))
-        # with open(yaml_p, 'w', encoding='utf-8') as f:
-        #     yaml.dump(new_data, f)
-        # print('Done!\n')
+        # delete CN nodes
+        with open(yaml_p, 'rb') as f:
+            old_data = yaml.load(f)
+        new_data = {'proxies': []}
+        for i in range(len(old_data['proxies'])):
+            if 'CN' not in old_data['proxies'][i]['name']:
+                new_data['proxies'].append(old_data['proxies'][i])
+        # print(len(new_data['proxies']))
+        with open(yaml_p, 'w', encoding='utf-8') as f:
+            yaml.dump(new_data, f)
+        print('Done!\n')
 
     def read_list(self, json_file, split=False):  # 将 sub_list.json Url 内容读取为列表
         with open(json_file, 'r', encoding='utf-8') as f:
